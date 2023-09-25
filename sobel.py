@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     # print(grey_img.shape)
     grey_img = bgr2grey(grey_img)
-    cv2.imwrite('grey_img.png', grey_img)
+    # cv2.imwrite('grey_img.png', grey_img)
 
     # https://stackoverflow.com/questions/39035510/python-implementing-sobel-operators-with-python-without-opencv
     # a1 = np.matrix([1, 2, 1])
