@@ -145,9 +145,21 @@ def canny_detection(image, new_gaussian=None, low_threshold=0.05, high_threshold
 
 if __name__ == '__main__':
     img = cv2.imread('imgin/test.png')
-    canny = canny_detection(img, gaussian_kernel(5, sigma=1.6))
+    canny = canny_detection(img.copy(), gaussian_kernel(5, sigma=1.6))
     display(canny)
 
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+    dilated = cv2.morphologyEx(canny.copy(), cv2.MORPH_CLOSE, kernel, iterations=2)
+    # dilated = cv2.dilate(canny.copy(), kernel, iterations=1)
+    cnts, _ = cv2.findContours(dilated.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    display(dilated)
+
+    coins = img.copy()
+    for c in cnts:
+        area = cv2.contourArea(c)
+        if area > 100:
+            cv2.drawContours(coins , [c], -1, (0, 0, 255), -1)
+    display(coins)
 
     # grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
