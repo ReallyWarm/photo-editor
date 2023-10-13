@@ -46,14 +46,17 @@ while True:
     horizontal_padding = original_width - resized_width
 
     A = img.flatten()
-    B = padding0(edited_image, vertical_padding, horizontal_padding).flatten() if vertical_padding or horizontal_padding else edited_image.flatten()
-
+    if mode == 4 or mode == 5:
+        B = edited_image.flatten()
+    #B = padding0(edited_image, vertical_padding, horizontal_padding).flatten() if vertical_padding or horizontal_padding else edited_image.flatten()
+    
     plt.figure(figsize=(12, 6))
     plt.subplot(2, 2, 1); plt.imshow(img)
     plt.title("OLD IMAGE")
     plt.subplot(2, 2, 2); plt.imshow(edited_image)
     plt.title("NEW IMAGE")
-    plt.figtext(0.5, 0.3, f'Cosine Similarity : {cosine_similarity(A, B)}', fontsize=12, ha='center', va='center', color='blue')
+    if mode == 4 or mode == 5:
+        plt.figtext(0.5, 0.3, f'Cosine Similarity : {cosine_similarity(A, B)}', fontsize=12, ha='center', va='center', color='blue')
     plt.show()
     
     
