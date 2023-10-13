@@ -1,5 +1,4 @@
 from all_import import *
-from sklearn.metrics.pairwise import cosine_similarity
 
 def padding0(edited_image, vert_padding, hori_padding):
         # Pad the resized image with zeros
