@@ -1,6 +1,4 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import cv2
+from all_import import *
 
 def color_threshold(img_inp):
 
