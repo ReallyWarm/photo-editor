@@ -1,5 +1,4 @@
-import cv2
-import numpy as np
+from all_import import *
 
 img = cv2.imread('imgin/fox.jpg')
 img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY).astype(float)

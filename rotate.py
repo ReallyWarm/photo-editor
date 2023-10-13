@@ -1,8 +1,7 @@
-import cv2
-import numpy as np
+from all_import import *
 
-def rotate_image(img, angle):
-    img = cv2.imread(f'imgin/{img}')
+def rotate_image(img):
+    angle = int(input("Enter rotate angle: (degree(s))"))
     h, w = img.shape[:2] # return (height, width, chanel)
     center_x, center_y = w // 2, h // 2
 
