@@ -1,5 +1,4 @@
-import cv2, numpy as np
-from scipy.signal import convolve2d
+from all_import import *
 
 def display(img, name='win'):
     cv2.imshow(name, img)
