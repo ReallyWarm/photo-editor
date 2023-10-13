@@ -35,9 +35,25 @@ while True:
         print("Incorrect Mode. Please Try Again")
         continue
 
-    fig, ax = plt.subplots(1,2,figsize=(12,6))
-    ax[0].imshow(img)
-    ax[1].imshow(edited_image)
+    # Get the dimensions of the original image
+    original_height, original_width, _ = img.shape
+
+    # Get the dimensions of the resized image
+    resized_height, resized_width, _ = edited_image.shape
+        
+    # Calculate the padding needed to match sizes
+    vertical_padding = original_height - resized_height
+    horizontal_padding = original_width - resized_width
+
+    A = img.flatten()
+    B = padding0(edited_image, vertical_padding, horizontal_padding).flatten() if vertical_padding or horizontal_padding else edited_image.flatten()
+
+    plt.figure(figsize=(12, 6))
+    plt.subplot(2, 2, 1); plt.imshow(img)
+    plt.title("OLD IMAGE")
+    plt.subplot(2, 2, 2); plt.imshow(edited_image)
+    plt.title("NEW IMAGE")
+    plt.figtext(0.5, 0.3, f'Cosine Similarity : {cosine_similarity(A, B)}', fontsize=12, ha='center', va='center', color='blue')
     plt.show()
     
     
