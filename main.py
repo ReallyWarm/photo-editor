@@ -5,6 +5,7 @@ from resize import *
 from rotate import *
 #from sharpen import *
 #from sobel import *
+from resize_crop import *
 from cos_sim import *
 
 mode_list = ["Resize", "Rotate", "Crop", "Color Threshold", "Edge Detect"]
@@ -26,7 +27,7 @@ while True:
     elif mode == 2:
         edited_image = rotate_image(img)
     elif mode == 3:
-        pass
+        edited_image = croping(img)
     elif mode == 4:
         edited_image = color_threshold(img)
     elif mode == 5:
