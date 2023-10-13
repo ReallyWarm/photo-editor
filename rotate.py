@@ -1,7 +1,7 @@
 from all_import import *
 
 def rotate_image(img):
-    angle = int(input("Enter rotate angle: (degree(s))"))
+    angle = int(input("Enter rotate angle: (degrees) : "))
     h, w = img.shape[:2] # return (height, width, chanel)
     center_x, center_y = w // 2, h // 2
 
