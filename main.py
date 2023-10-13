@@ -1,27 +1,35 @@
-#from canny import *
-from color_threshold import *
-#from npsobel import *
-from resize import *
-from rotate import *
-#from sharpen import *
-#from sobel import *
-from resize_crop import *
-from cos_sim import *
+from edge_detect import EdgeOperation, gaussian_kernel
+from color_threshold import color_threshold
+from rotate import rotate_image
+from resize_crop import resize_image, croping
+from cos_sim import cosine_similarity
+from all_import import *
 
-mode_list = ["Resize", "Rotate", "Crop", "Color Threshold", "Edge Detect"]
+def display(img, name='win'):
+    cv2.imshow(name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-while True:
-    img_name = input("Enter Image Name (Ex. 1.jpg): ")
+mode_list = ["Resize", "Rotate", "Crop", "Color Threshold", "Edge Enhance"]
+edge_op = EdgeOperation()
+
+if __name__ == '__main__':
+    img_name = input("Enter Image Name (Ex. image.jpg): ")
     try:
         img = cv2.imread(f"imgin/{img_name}")
-    except FileNotFoundError as e:
-        continue
+    except cv2.error as e:
+        pass
+
+    if img is None: 
+        raise Exception(f'Can\'t open/read file from (.imgin/{img_name}): Please check file path/integrity.')
+
+    edge_op.new_image(img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     print("Choose Features to Edit Image")
     for i in range(len(mode_list)):
         print(f"[{i + 1}]: {mode_list[i]}")
-    mode = int(input("Please Select Feature : "))
 
+    mode = int(input("Please Select Feature : "))
     if mode == 1:
         edited_image = resize_image(img)
     elif mode == 2:
@@ -31,10 +39,10 @@ while True:
     elif mode == 4:
         edited_image = color_threshold(img)
     elif mode == 5:
-        pass
+        edge_op.get_params()
+        edited_image = edge_op.edge_enhance()
     else:
-        print("Incorrect Mode. Please Try Again")
-        continue
+        raise Exception("Incorrect Mode: Please Try Again")
 
     # Get the dimensions of the original image
     original_height, original_width, _ = img.shape
