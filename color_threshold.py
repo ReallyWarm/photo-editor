@@ -31,23 +31,3 @@ def color_threshold(img_inp):
 
     return img_final_hsv_rgb
 
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
