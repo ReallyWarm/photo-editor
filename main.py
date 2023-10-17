@@ -16,7 +16,7 @@ edge_op = EdgeOperation()
 if __name__ == '__main__':
     img_name = input("Enter Image Name (Ex. image.jpg): ")
     try:
-        img = cv2.imread(f"imgin/{img_name}")
+        img = cv2.imread(f"imgin/{img_name}.jpg")
     except cv2.error as e:
         pass
 
