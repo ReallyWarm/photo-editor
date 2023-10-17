@@ -2,7 +2,7 @@ from edge_detect import EdgeOperation, gaussian_kernel
 from color_threshold import color_threshold
 from rotate import rotate_image
 from resize_crop import resize_image, croping
-from cos_sim import cosine_similarity
+from cos_sim import cosine_similarity, padding0
 from all_import import *
 
 def display(img, name='win'):
@@ -51,21 +51,28 @@ if __name__ == '__main__':
     resized_height, resized_width, _ = edited_image.shape
         
     # Calculate the padding needed to match sizes
-    vertical_padding = original_height - resized_height
-    horizontal_padding = original_width - resized_width
+    vertical_padding = abs(original_height - resized_height)
+    horizontal_padding = abs(original_width - resized_width)
 
-    A = img.flatten()
     if mode == 4 or mode == 5:
+        A = img.flatten()
         B = edited_image.flatten()
-    #B = padding0(edited_image, vertical_padding, horizontal_padding).flatten() if vertical_padding or horizontal_padding else edited_image.flatten()
-    
+    else:
+        if (original_height > resized_height) or (original_width > resized_width):
+            padding_image = padding0(edited_image, vertical_padding, horizontal_padding)
+            A = img.flatten()
+            B = padding_image.flatten()
+        else:
+            padding_image = padding0(img, vertical_padding, horizontal_padding)
+            A = padding_image.flatten()
+            B = edited_image.flatten()
+
     plt.figure(figsize=(12, 6))
     plt.subplot(2, 2, 1); plt.imshow(img)
     plt.title("OLD IMAGE")
     plt.subplot(2, 2, 2); plt.imshow(edited_image)
     plt.title("NEW IMAGE")
-    if mode == 4 or mode == 5:
-        plt.figtext(0.5, 0.3, f'Cosine Similarity : {cosine_similarity(A, B)}', fontsize=12, ha='center', va='center', color='blue')
+    plt.figtext(0.5, 0.3, f'Cosine Similarity : {cosine_similarity(A, B)}', fontsize=12, ha='center', va='center', color='blue')
     plt.show()
     
     
