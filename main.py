@@ -23,8 +23,9 @@ if __name__ == '__main__':
     if img is None: 
         raise Exception(f'Can\'t open/read file from (.imgin/{img_name}): Please check file path/integrity.')
 
-    edge_op.new_image(img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    edge_op.new_image(img)
+    
     print("Choose Features to Edit Image")
     for i in range(len(mode_list)):
         print(f"[{i + 1}]: {mode_list[i]}")

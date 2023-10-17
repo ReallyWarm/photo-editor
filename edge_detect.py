@@ -73,7 +73,7 @@ class EdgeOperation:
     def get_edge(self):
         '''return (hard_edge, soft_edge)'''
 
-        grey = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+        grey = cv2.cvtColor(self.image, cv2.COLOR_RGB2GRAY)
 
         gaussian_filter = self.new_gaussian if self.new_gaussian is not None else self.gaussian_default
         blur = convolve2d(grey, gaussian_filter, 'same', 'symm')
@@ -114,14 +114,15 @@ class EdgeOperation:
         color_img[:] = color
         foreground = color_img.astype(float)
 
-        image = cv2.cvtColor(self.image.copy(), cv2.COLOR_BGR2RGB)
-        background = image.astype(float)
+        background = self.image.astype(float)
         
         foreground = cv2.multiply(alpha, foreground)
         background = cv2.multiply(1.0-alpha, background)
-        blend = cv2.add(foreground, background) / 255
+        out = cv2.add(foreground, background) / 255
 
-        return blend
+        out = cv2.normalize(out, None, 255, 0, cv2.NORM_MINMAX, cv2.CV_8U)
+
+        return out
 
 
 def sobel_filter(grey_img):
