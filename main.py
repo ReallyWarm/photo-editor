@@ -5,6 +5,8 @@ from rotate import rotate_image
 from resize_crop import resize_image, croping
 from cos_sim import cosine_similarity, padding0
 from all_import import *
+import os
+FLIE_PATH = os.path.dirname(__file__)
 
 def display(img, name='win'):
     cv2.imshow(name, img)
@@ -17,12 +19,13 @@ edge_op = EdgeOperation()
 if __name__ == '__main__':
     img_name = input("Enter Image Name (Ex. image.jpg): ")
     try:
-        img = cv2.imread(f"imgin/{img_name}.jpg")
+        img = cv2.imread(f"{FLIE_PATH}/imgin/{img_name}.jpg")
     except cv2.error as e:
         pass
 
     if img is None: 
-        raise Exception(f'Can\'t open/read file from (imgin/{img_name}.jpg): Please check file path/integrity.')
+        error = f'Can\'t open/read file from ({FLIE_PATH}\imgin\{img_name}.jpg): Please check file path/integrity.'
+        raise Exception(error)
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     edge_op.new_image(img)
@@ -89,4 +92,13 @@ if __name__ == '__main__':
     plt.subplot(2, 2, 2); plt.imshow(edited_image)
     plt.title("NEW IMAGE")
     plt.figtext(0.5, 0.3, f'Cosine Similarity : {cosine_similarity(A, B)}', fontsize=12, ha='center', va='center', color='blue')
-    plt.show()
+    plt.show(block=False)
+    plt.pause(1)
+
+    save = input("Save image (y/n):")
+    if save.lower() in ['y', 'yes']:
+        edited_image = cv2.cvtColor(edited_image, cv2.COLOR_RGB2BGR)
+        cv2.imwrite(f'{FLIE_PATH}/imgout/{img_name}_edited.jpg', edited_image)
+
+    print("Exiting program . . .")
+    plt.close()
