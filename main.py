@@ -60,13 +60,23 @@ if __name__ == '__main__':
         A = img.flatten()
         B = edited_image.flatten()
     else:
-        if (original_height > resized_height) or (original_width > resized_width):
-            padding_image = padding0(edited_image, vertical_padding, horizontal_padding)
+        if (original_height > resized_height) and (original_width > resized_width):
+            padding_edited = padding0(edited_image, vertical_padding, horizontal_padding)
             A = img.flatten()
-            B = padding_image.flatten()
+            B = padding_edited.flatten()
+        elif (original_height > resized_height) and (original_width < resized_width):
+            padding_original = padding0(img, 0, horizontal_padding)
+            padding_edited = padding0(edited_image, vertical_padding, 0)
+            A = padding_original.flatten()
+            B = padding_edited.flatten()
+        elif (original_height < resized_height) and (original_width > resized_width):
+            padding_original = padding0(img, vertical_padding, 0)
+            padding_edited = padding0(edited_image, 0, horizontal_padding)
+            A = padding_original.flatten()
+            B = padding_edited.flatten()
         else:
-            padding_image = padding0(img, vertical_padding, horizontal_padding)
-            A = padding_image.flatten()
+            padding_original = padding0(img, vertical_padding, horizontal_padding)
+            A = padding_original.flatten()
             B = edited_image.flatten()
 
     # Display images
