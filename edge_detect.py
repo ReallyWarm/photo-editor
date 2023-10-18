@@ -3,6 +3,7 @@ from blur import gaussian_kernel
 
 # https://towardsdatascience.com/canny-edge-detection-step-by-step-in-python-computer-vision-b49c3a2d8123
 # https://github.com/UsamaI000/CannyEdgeDetection-from-scratch-python/blob/master/CannyEdgeDetector.ipynb
+# https://learnopencv.com/alpha-blending-using-opencv-cpp-python/
 
 class EdgeOperation:
     def __init__(self, image=None):
@@ -47,17 +48,13 @@ class EdgeOperation:
             ltr = float(input('Low threshold ratio (default=5): '))/100
             htr = float(input('High threshold ratio (default=9): '))/100
 
-            wmg = int(input('Weak magnitude (range=0-255, default=25): '))
-            if wmg < 0: wmg = 0
-            elif wmg > 255: wmg = 255
-            smg = int(input('Strong magnitude (range=0-255, default=255): '))
+            smg = int(input('Edge magnitude (range=0-255, default=255): '))
             if smg < 0: smg = 0
             elif smg > 255: smg = 255
 
             self.new_gaussian = gaussian_kernel(g_size, g_sigma)
             self.low_threshold_ratio = ltr
             self.high_threshold_ratio = htr
-            self.weak_mag = wmg
             self.strong_mag = smg
 
         elif mode.lower() in ['y', 'yes']:
@@ -86,7 +83,6 @@ class EdgeOperation:
 
         return self.hard_edge, self.soft_edge
     
-    # https://learnopencv.com/alpha-blending-using-opencv-cpp-python/
     def edge_enhance(self):
         hard, soft = self.get_edge()
 
