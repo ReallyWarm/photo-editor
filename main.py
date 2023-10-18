@@ -55,6 +55,7 @@ if __name__ == '__main__':
     vertical_padding = abs(original_height - resized_height)
     horizontal_padding = abs(original_width - resized_width)
 
+    # Padding a smaller image to match image size
     if mode == 4 or mode == 5:
         A = img.flatten()
         B = edited_image.flatten()
@@ -68,6 +69,7 @@ if __name__ == '__main__':
             A = padding_image.flatten()
             B = edited_image.flatten()
 
+    # Display images
     plt.figure(figsize=(12, 6))
     plt.subplot(2, 2, 1); plt.imshow(img)
     plt.title("OLD IMAGE")
@@ -75,6 +77,3 @@ if __name__ == '__main__':
     plt.title("NEW IMAGE")
     plt.figtext(0.5, 0.3, f'Cosine Similarity : {cosine_similarity(A, B)}', fontsize=12, ha='center', va='center', color='blue')
     plt.show()
-    
-    
-    
