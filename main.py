@@ -1,4 +1,5 @@
-from edge_detect import EdgeOperation, gaussian_kernel
+from edge_detect import EdgeOperation
+from blur import get_blurRGB
 from color_threshold import color_threshold
 from rotate import rotate_image
 from resize_crop import resize_image, croping
@@ -10,7 +11,7 @@ def display(img, name='win'):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-mode_list = ["Resize", "Rotate", "Crop", "Color Threshold", "Edge Enhance"]
+mode_list = ["Resize", "Rotate", "Crop", "Color Threshold", "Edge Enhance", "Blur"]
 edge_op = EdgeOperation()
 
 if __name__ == '__main__':
@@ -21,7 +22,7 @@ if __name__ == '__main__':
         pass
 
     if img is None: 
-        raise Exception(f'Can\'t open/read file from (.imgin/{img_name}): Please check file path/integrity.')
+        raise Exception(f'Can\'t open/read file from (imgin/{img_name}.jpg): Please check file path/integrity.')
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     edge_op.new_image(img)
@@ -42,6 +43,8 @@ if __name__ == '__main__':
     elif mode == 5:
         edge_op.get_params()
         edited_image = edge_op.edge_enhance()
+    elif mode == 6:
+        edited_image = get_blurRGB(img)
     else:
         raise Exception("Incorrect Mode: Please Try Again")
 
@@ -56,7 +59,7 @@ if __name__ == '__main__':
     horizontal_padding = abs(original_width - resized_width)
 
     # Padding a smaller image to match image size
-    if mode == 4 or mode == 5:
+    if mode in [4,5,6]:
         A = img.flatten()
         B = edited_image.flatten()
     else:
