@@ -1,6 +1,9 @@
 from all_import import *
 from blur import gaussian_kernel
 
+# https://towardsdatascience.com/canny-edge-detection-step-by-step-in-python-computer-vision-b49c3a2d8123
+# https://github.com/UsamaI000/CannyEdgeDetection-from-scratch-python/blob/master/CannyEdgeDetector.ipynb
+
 class EdgeOperation:
     def __init__(self, image=None):
         if image is not None:
@@ -134,12 +137,10 @@ def sobel_filter(grey_img):
 
     return Gout, theta
 
-# https://github.com/UsamaI000/CannyEdgeDetection-from-scratch-python/blob/master/CannyEdgeDetector.ipynb
 def gradient_direction(theta):
     angle = np.rad2deg(theta) + 180
     return angle
 
-# https://towardsdatascience.com/canny-edge-detection-step-by-step-in-python-computer-vision-b49c3a2d8123
 def non_max_suppression(grad, angle):
     h, w = grad.shape
     nms = np.zeros((h, w), dtype=np.uint8)
