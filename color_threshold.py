@@ -10,9 +10,6 @@ def color_threshold(img_inp):
     lower = (np.interp(hue_threshold[0], [0, 365], [0, 180]), np.interp(sat_threshold[0], [0, 100], [0, 255]), np.interp(value_threshold[0], [0, 100], [0, 255]))
     higher = (np.interp(hue_threshold[1], [0, 365], [0, 180]), np.interp(sat_threshold[1], [0, 100], [0, 255]), np.interp(value_threshold[1], [0, 100], [0, 255]))
 
-    print(lower)
-    print(higher)
-
     img_final = img_inp.copy()
     img_inp_hsv = cv2.cvtColor(img_inp, cv2.COLOR_RGB2HSV)
 
@@ -49,7 +46,7 @@ def color_threshold(img_inp):
 
     # img_final_hsv_rgb = cv2.cvtColor(img_final_hsv, cv2.COLOR_HSV2RGB)
 
-    return img_final, img_inp_hsv
+    return img_final
 
 
 
