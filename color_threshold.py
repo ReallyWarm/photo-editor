@@ -1,8 +1,12 @@
 from all_import import *
 
+
+# Website for find out HSV Color Code
+#   https://colorpicker.me/#ab0471
+
 def color_threshold(img_inp):
 
-    # get input about user lower and upper thredhold   (RGB)
+    # get input about user lower and upper thredhold  (HSV)
     hue_threshold = [int(x) for x in input("(HSV) Enter range HUE Threshold  < 0-359 deg > ex. 120-300 : ").split('-')]
     sat_threshold = [int(x) for x in input("(HSV) Enter range Saturation Threshold  < 0-100 % > ex. 30-80 : ").split('-')]
     value_threshold = [int(x) for x in input("(HSV) Enter range Value Threshold < 0-100 % > ex. 50-90 : ").split('-')]
