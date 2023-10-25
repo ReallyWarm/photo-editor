@@ -6,12 +6,8 @@ from resize_crop import resize_image, croping
 from cos_sim import cosine_similarity, padding0
 from all_import import *
 import os
-FLIE_PATH = os.path.dirname(__file__)
 
-def display(img, name='win'):
-    cv2.imshow(name, img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+FLIE_PATH = os.path.dirname(__file__)
 
 mode_list = ["Resize", "Rotate", "Crop", "Color Threshold", "Edge Enhance", "Blur"]
 edge_op = EdgeOperation()
