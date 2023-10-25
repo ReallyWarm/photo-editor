@@ -44,11 +44,11 @@ class EdgeOperation:
                 g_size = max(g_size+1, 3)
                 print(f'Warning: Kernel size is not an odd number. Using size of {g_size}')
             g_sigma = float(input('Guassian kernel intensity (default=1.6): '))
+            
+            htr = float(input('Edge intensity high threshold ratio (default=9): '))/100
+            ltr = float(input('Edge intensity low threshold ratio (default=5): '))/100
 
-            ltr = float(input('Low threshold ratio (default=5): '))/100
-            htr = float(input('High threshold ratio (default=9): '))/100
-
-            smg = int(input('Edge magnitude (range=0-255, default=255): '))
+            smg = int(input('Hard edge opacity (range=0-255, default=255): '))
             if smg < 0: smg = 0
             elif smg > 255: smg = 255
 
