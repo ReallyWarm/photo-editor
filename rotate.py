@@ -21,7 +21,7 @@ def rotate_image(img):
 
     rotated_img = cv2.warpAffine(img, rotation_matrix, (new_w, new_h))
 
-    # Detect Image Contour and Crop an image
+    # Detect Image Contour and Crop an image to real size
     gray = cv2.cvtColor(rotated_img, cv2.COLOR_BGR2GRAY)
     contours, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     x_min, y_min, x_max, y_max = float('inf'), float('inf'), -float('inf'), -float('inf')
